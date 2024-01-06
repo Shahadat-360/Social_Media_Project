@@ -24,9 +24,9 @@
                 </li>
                 <li class="nav-item">
                     {% if user.user_profile.profile_pic %}
-                        <a class="nav-link" href="#"><img class="rounded-circle" src="/media/{{ user.user_profile.profile_pic }}" height="40px" width="40px" alt=""></a>
+                        <a class="nav-link" href="{% url 'App_Login:profile' %}"><img class="rounded-circle" src="/media/{{ user.user_profile.profile_pic }}" height="40px" width="40px" alt=""></a>
                         {% else %}
-                        <a class="nav-link" href="#"><img class="rounded-circle" src="/media/profile_pics/avater.jpg" height="40px" width="40px" alt="Demo"></a>
+                        <a class="nav-link" href="{% url 'App_Login:profile' %}"><img class="rounded-circle" src="/media/profile_pics/avater.jpg" height="40px" width="40px" alt="Demo"></a>
                     {% endif %}
                 </li>
             </ul>
