@@ -6,7 +6,7 @@ from django.db import models
 class Posts(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post')
     image = models.ImageField(upload_to='post_images')
-    caption = models.TextField(max_length=264, blank=True)
+    caption = models.CharField(max_length=264, blank=True)
     uploaded_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
