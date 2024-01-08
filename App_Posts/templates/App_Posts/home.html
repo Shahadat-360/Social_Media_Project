@@ -36,6 +36,15 @@
                         </div>
                         <br>
                         <img src="/media/{{ post.image }}"  width="100%" alt="">
+                        <div style="padding: 20px">
+                            <p>{{ post.caption|linebreaks }}</p>
+                            {{ post.Liked_post.count }} likes <br>
+                            {% if post.pk in liked_post_list %}
+                                <a href="{% url 'App_Posts:unliked' pk=post.pk %}"><i class="fa fa-heart" style="font-size: 36px"></i></a>
+                            {% else %}
+                                <a href="{% url 'App_Posts:liked' pk=post.pk %}"><i class="fa fa-heart-o" style="font-size: 36px"></i></a>
+                            {% endif %}
+                        </div>
                     </div>
                     <br><br>
                 {% endfor %}
