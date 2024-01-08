@@ -1,0 +1,49 @@
+{% extends  'navbar.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %}{{ user_other.user_profile.full_name }} (@{{ user_other.username }}) {% endblock %}
+{% block css_block %}
+    <style>
+        .crop {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-left: 5px;
+        }
+        .crop img{
+            width: 400px;
+            height: 300px;
+            margin: -75px 0 0 -100px;
+        }
+    </style>
+{% endblock %}
+{% block body_block %}
+    <div class="row">
+        <div class="col-sm-4">
+            {% if user_other.user_profile.profile_pic %}
+                <img class="rounded-circle" src="/media/{{ user_other.user_profile.profile_pic }}" height="250px" width="250px" alt="">
+            {% else %}
+                <img class="rounded-circle" src="/media/profile_pics/avater.jpg" height="250px" width="250px" alt="Demo">
+            {% endif %}
+        </div>
+        <div class="col-sm-8">
+            {% if not already_followed %}
+                <h3>{{ user_other.username }} &nbsp; <a href="{% url 'App_Login:follow' username=user_other.username %}" class="btn btn-primary btn-sm">Follow</a></h3><br>
+            {% else %}
+                <h3>{{ user_other.username }} &nbsp; <a href="{% url 'App_Login:unfollow' username=user_other.username %}" class="btn btn-primary btn-sm">Unfollow</a></h3><br>
+            {% endif %}
+            <h4>{{ user_other.post.count }} posts &nbsp; {{ user_other.following.count }} followers &nbsp; &nbsp; {{ user_other.follower.count }} following</h4>
+            <br>
+            <h4>{{ user_other.user_profile.full_name }}</h4>
+            <h6>{{ user_other.user_profile.description | linebreaks }}</h6>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        {% for post in user_other.post.all %}
+            <div class="crop">
+                <img src="/media/{{ post.image }}" alt="">
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
